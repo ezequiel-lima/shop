@@ -67,13 +67,13 @@ namespace Shop.Migrations
 
             modelBuilder.Entity("Shop.Models.Product", b =>
                 {
-                    b.HasOne("Shop.Models.Category", "Cate")
+                    b.HasOne("Shop.Models.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Cate");
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("Shop.Models.Category", b =>
