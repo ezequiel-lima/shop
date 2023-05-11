@@ -1,0 +1,23 @@
+﻿@page "/products/create"
+
+<h3>CreateProduct</h3>
+
+<EditForm Model="_model" OnInvalidSubmit="@HandleSubmitAsync">
+
+    <div class="mb-3">
+        <label for="Title" class="form-label">
+            Title
+        </label>
+        <InputText class="form-control" type="text" id="Title" @bind-Value="_model.Title"></InputText>
+    </div>
+
+</EditForm>
+
+@code {
+    private Product _model = new();
+
+    async Task HandleSubmitAsync()
+    {
+        
+    }
+}
