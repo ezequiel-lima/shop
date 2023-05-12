@@ -15,6 +15,7 @@
                 <td>Title</td>
                 <td>Price</td>
                 <td>Category</td>
+                <td>Opções</td>
             </tr>
         </thead>
         <tbody>
@@ -23,8 +24,9 @@
                 <tr>
                     <td>@item.Id</td>
                     <td>@item.Title</td>
-                    <td>@item.Price</td>
+                    <td>@item.Price.ToString("C")</td>
                     <td>@item.Category.Name</td>
+                    <td><a href="products/edit/@item.Id" class="btn btn-info"><i class="oi oi-pencil"></i> Editar Produto</a></td>
                 </tr>
             }
         </tbody>
