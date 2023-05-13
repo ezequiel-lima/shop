@@ -8,6 +8,11 @@
 
     <a href="products/create" class="btn btn-success"><i class="oi oi-plus"></i> Criar Produto</a>
 
+    <div class="input-group mt-3">
+        <input type="text" class="form-control" @bind-value="searchTerm" @onblur="Filter" placeholder="Pesquisar produtos">
+        <button class="btn btn-primary" @onclick="Filter">Pesquisar</button>
+    </div>
+
     <table class="table">
         <thead>
             <tr>
@@ -38,9 +43,24 @@
 
 @code {
     private List<Product> _products = new();
+    private string searchTerm = "";
 
     protected override async Task OnInitializedAsync()
     {
         _products = await _context.Products.AsNoTracking().Include(x => x.Category).ToListAsync();
+    }
+
+    async Task Filter()
+    {
+        if (string.IsNullOrWhiteSpace(searchTerm))
+        {
+            _products = await _context.Products.AsNoTracking().Include(x => x.Category).ToListAsync();
+        }
+        else
+        {
+            _products = await _context.Products.AsNoTracking().Include(x => x.Category)
+            .Where(x => x.Title.Contains(searchTerm))
+            .ToListAsync();
+        }
     }
 }
