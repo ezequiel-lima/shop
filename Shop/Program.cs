@@ -10,6 +10,10 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+var secrets = new Secrets();
+builder.Configuration.GetSection("Secrets").Bind(secrets);
+
 builder.Services.AddDbContext<AppDbContext>(x =>
 {
     x.UseSqlServer(connectionString);
@@ -35,3 +39,8 @@ app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 
 app.Run();
+
+public class Secrets
+{
+    public string JwtTokenSecret { get; set; } = string.Empty;
+}
